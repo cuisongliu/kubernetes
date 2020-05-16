@@ -32,6 +32,7 @@ import (
 	"k8s.io/kubernetes/plugin/pkg/admission/gc"
 	"k8s.io/kubernetes/plugin/pkg/admission/imagepolicy"
 	"k8s.io/kubernetes/plugin/pkg/admission/limitranger"
+	"k8s.io/kubernetes/plugin/pkg/admission/localtime"
 	"k8s.io/kubernetes/plugin/pkg/admission/namespace/autoprovision"
 	"k8s.io/kubernetes/plugin/pkg/admission/namespace/exists"
 	"k8s.io/kubernetes/plugin/pkg/admission/noderestriction"
@@ -91,6 +92,7 @@ var AllOrderedPlugins = []string{
 	validatingwebhook.PluginName,            // ValidatingAdmissionWebhook
 	resourcequota.PluginName,                // ResourceQuota
 	deny.PluginName,                         // AlwaysDeny
+	localtime.PluginName,
 }
 
 // RegisterAllAdmissionPlugins registers all admission plugins and
@@ -123,6 +125,7 @@ func RegisterAllAdmissionPlugins(plugins *admission.Plugins) {
 	setdefault.Register(plugins)
 	resize.Register(plugins)
 	storageobjectinuseprotection.Register(plugins)
+	localtime.Register(plugins)
 }
 
 // DefaultOffAdmissionPlugins get admission plugins off by default for kube-apiserver.
@@ -137,6 +140,7 @@ func DefaultOffAdmissionPlugins() sets.String {
 		mutatingwebhook.PluginName,          //MutatingAdmissionWebhook
 		validatingwebhook.PluginName,        //ValidatingAdmissionWebhook
 		resourcequota.PluginName,            //ResourceQuota
+		localtime.PluginName,
 	)
 
 	if utilfeature.DefaultFeatureGate.Enabled(features.PodPriority) {

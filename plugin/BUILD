@@ -38,6 +38,7 @@ filegroup(
         "//plugin/pkg/admission/storage/persistentvolume/resize:all-srcs",
         "//plugin/pkg/admission/storage/storageclass/setdefault:all-srcs",
         "//plugin/pkg/admission/storage/storageobjectinuseprotection:all-srcs",
+        "//plugin/pkg/admission/localtime:all-srcs",
         "//plugin/pkg/auth:all-srcs",
     ],
     tags = ["automanaged"],
